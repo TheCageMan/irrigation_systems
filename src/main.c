@@ -4,6 +4,7 @@
 #include "valves.h"
 #include "controller.h"
 #include "tick_timer.h"
+#include "moisture_sensors.h"
 
 int main(void)
 {	
