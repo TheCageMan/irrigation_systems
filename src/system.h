@@ -4,6 +4,11 @@
 #define MAX_OPEN_TIME	1000 * 10	// 10s
 #define REST_TIME		1000 * 20	// 20s
 
+#define MOISTURE_SAMPLE_INTERVAL	1000 * 5	// 5s
+// how many samples to take and average
+//  the higher the number the longer it takes, but measurement is smoother
+#define NUMBER_OF_SAMPLES = 10
+
 #define BIT0  (1<<0)
 #define BIT1  (1<<1)
 #define BIT2  (1<<2)

@@ -9,7 +9,8 @@ int main(void)
 {	
 	System_InitializeHW();
 	TickTimer_InitializeHW();
-	Valve_InitilizeApp();
+	Moisture_InitilizeApp();
+	Valve_InitilizeApp();	
 	
 	// enable global interrupts
 	sei();
