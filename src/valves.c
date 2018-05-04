@@ -29,6 +29,8 @@ static Valve valve_3;
 static Valve valve_4;
 static Valve valve_5;
 
+unsigned int valve_size = 5;
+
 static Valve *Valves[] = {
 	&valve_1,
 	&valve_2,
@@ -48,7 +50,7 @@ static Status openState(Valve *me, Event const *e);
 
 void Valve_Tick(){
 	static ValveEvt tick_evt = {{ TICK_SIG }};
-	for(unsigned int i=0;i<5;i++){
+	for(unsigned int i=0;i<valve_size;i++){
 		StateMachine_Dispatch((StateMachine *)Valves[i], (Event *)&tick_evt);
 	}
 }
@@ -168,7 +170,7 @@ Status openState(Valve *me, Event const *e){
 
 uint8_t createBitmask(uint8_t valve_bitmask){
 	uint8_t data = 0b00000000;
-	for(unsigned int i=0;i<5;i++){
+	for(unsigned int i=0;i<valve_size;i++){
 		if (Valves[i]->super.state == (SHF)&openState){
 			data |= Valves[i]->valve_bitmask;
 		} else {
