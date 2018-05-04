@@ -43,7 +43,7 @@ void updateRegister(uint8_t data);
 
 static Status initState(Valve *me, Event const *e);  // Initial trans
 static Status idleState(Valve *me, Event const *e);  // State handler function
-static Status closeState(Valve *me, Event const *e);
+static Status restState(Valve *me, Event const *e);
 static Status openState(Valve *me, Event const *e);
 
 void Valve_Tick(){
@@ -113,11 +113,10 @@ Status idleState(Valve *me, Event const *e){
 	return SM_IGNORED();
 }
 
-Status closeState(Valve *me, Event const *e){
+Status restState(Valve *me, Event const *e){
 	switch (e->sig){
 		case SM_ENTRY_SIG: {
-			me->milliseconds_since = TickTimer_Millis();
-			updateRegister(createBitmask(me->valve_bitmask)); // turn on valve
+			me->milliseconds_since = TickTimer_Millis();			
 			return SM_HANDLED();
 		}
 		case TICK_SIG: {
@@ -142,7 +141,7 @@ Status openState(Valve *me, Event const *e){
 	switch (e->sig){
 		case SM_ENTRY_SIG: {
 			me->milliseconds_since = TickTimer_Millis();
-			updateRegister(createBitmask(me->valve_bitmask)); // turn off valve
+			updateRegister(createBitmask(me->valve_bitmask)); // turn on valve
 			return SM_HANDLED();
 		}
 		case TICK_SIG: {
@@ -153,13 +152,14 @@ Status openState(Valve *me, Event const *e){
 			}
 			else
 			{
-				return SM_TRAN(&closeState);
+				return SM_TRAN(&restState);
 			}
 		}
 		case CLOSE_SIG: {
-			return SM_TRAN(&closeState);
+			return SM_TRAN(&restState);
 		}
 		case SM_EXIT_SIG: {
+			updateRegister(createBitmask(me->valve_bitmask)); // turn off valve
 			return SM_HANDLED();
 		}
 	}
