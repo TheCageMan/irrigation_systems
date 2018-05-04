@@ -56,19 +56,19 @@ void Valve_Tick(){
 }
 
 void Valve_InitilizeApp(){
-	valve_ctor(&valve_1, VALVE1, &SHIFTREG1_PORT);
+	valve_ctor(&valve_1, BIT1, &SHIFTREG1_PORT);
 	StateMachine_Init((StateMachine *)&valve_1, (Event *)0);
 	
-	valve_ctor(&valve_2, VALVE2, &SHIFTREG1_PORT);
+	valve_ctor(&valve_2, BIT2, &SHIFTREG1_PORT);
 	StateMachine_Init((StateMachine *)&valve_2, (Event *)0);
 	
-	valve_ctor(&valve_3, VALVE3, &SHIFTREG1_PORT);
+	valve_ctor(&valve_3, BIT3, &SHIFTREG1_PORT);
 	StateMachine_Init((StateMachine *)&valve_3, (Event *)0);
 	
-	valve_ctor(&valve_4, VALVE4, &SHIFTREG1_PORT);
+	valve_ctor(&valve_4, BIT4, &SHIFTREG1_PORT);
 	StateMachine_Init((StateMachine *)&valve_4, (Event *)0);
 	
-	valve_ctor(&valve_5, VALVE5, &SHIFTREG1_PORT);
+	valve_ctor(&valve_5, BIT5, &SHIFTREG1_PORT);
 	StateMachine_Init((StateMachine *)&valve_5, (Event *)0);
 }
 

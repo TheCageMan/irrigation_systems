@@ -18,12 +18,6 @@
 #define BIT6  (1<<6)
 #define BIT7  (1<<7)
 
-#define VALVE1  BIT1
-#define VALVE2  BIT2
-#define VALVE3  BIT3
-#define VALVE4  BIT4
-#define VALVE5  BIT5
-
 #define ADC_PORT	PORTC
 #define ADC_PIN		0
 
