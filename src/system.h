@@ -1,6 +1,9 @@
 #ifndef SYSTEM_H_
 #define SYSTEM_H_
 
+#define MAX_OPEN_TIME	1000 * 10	// 10s
+#define REST_TIME		1000 * 20	// 20s
+
 #define BIT0  (1<<0)
 #define BIT1  (1<<1)
 #define BIT2  (1<<2)
