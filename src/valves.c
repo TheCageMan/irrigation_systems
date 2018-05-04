@@ -18,7 +18,7 @@ typedef struct ValveEvtTag {
 
 typedef struct ValveTag {
 	StateMachine super;                // Derived from StateTable structure
-	volatile long milliseconds_since;		   // state start
+	volatile long milliseconds_since;  // state start
 	volatile uint8_t *valve_port;      // Pointer to valve port
 	uint8_t valve_bitmask;             // Bit mask for valve pin
 } Valve;
@@ -122,7 +122,7 @@ Status closeState(Valve *me, Event const *e){
 		}
 		case TICK_SIG: {
 			// wait some time before valve can be opened again
-			if(TickTimer_Millis() - me->milliseconds_since < 2000)
+			if(TickTimer_Millis() - me->milliseconds_since < REST_TIME)
 			{
 				return SM_HANDLED();
 			}
@@ -147,7 +147,7 @@ Status openState(Valve *me, Event const *e){
 		}
 		case TICK_SIG: {
 			// wait some time and close valve
-			if(TickTimer_Millis() - me->milliseconds_since < 2000)
+			if(TickTimer_Millis() - me->milliseconds_since < MAX_OPEN_TIME)
 			{
 				return SM_HANDLED();
 			}
