@@ -5,9 +5,9 @@
 #include "moisture_sensors.h"
 
 typedef struct MoistureSensorTag {
-	uint16_t moisture_current;			  // sample acquired and averaged
+	uint16_t moisture_current;	 // sample acquired and averaged
 	volatile uint8_t *moisture_port;      // Pointer to moisture port
-	uint8_t moisture_bitmask;             // Bit mask for moisture pin
+	uint8_t moisture_bitmask;	 // Bit mask for moisture pin
 } MoistureSensor;
 
 static MoistureSensor sensor_1;
@@ -25,7 +25,7 @@ uint16_t readAdc(uint8_t channel);
 uint16_t readAvaragedMoisture(uint8_t channel);
 
 void Moisture_InitilizeApp(void){
-	sensor_ctor(&sensor_1, BIT0, &PORTC);
+	sensor_ctor(&sensor_1, BIT7, &PORTD);
 	milliseconds_since = TickTimer_Millis();
 }
 
@@ -36,8 +36,10 @@ uint16_t Moisture_Read(){
 		return;
 	}
 	
+	*(MoistureSensors[0]->moisture_port) |= MoistureSensors[0]->moisture_bitmask;
 	uint16_t value = readAvaragedMoisture(ADC_PIN);
-	milliseconds_since = TickTimer_Millis();	
+	*(MoistureSensors[0]->moisture_port) &= ~MoistureSensors[0]->moisture_bitmask;
+	milliseconds_since = TickTimer_Millis();
 	return value;
 }
 

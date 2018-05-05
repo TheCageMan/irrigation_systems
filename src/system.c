@@ -18,8 +18,8 @@ void initializePorts(void) {
 	SHIFTREG1_DDR = (SHIFTREG1_DS|SHIFTREG1_ST_CP|SHIFTREG1_SH_CP);
 	
 	// PortD initialization	
-	PORTD = 0x00;
-	DDRD  = 0xFF;
+	DDRD  = BIT7;
+	PORTD = 0x00;	
 }
 
 void initializeAdc(void){
